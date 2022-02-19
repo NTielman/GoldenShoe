@@ -16,31 +16,29 @@
 
 <!----------------  sign in - form  ---------------->
 <section class="section">
-    <div class="container">
+    <div class="container is-max-desktop">
         <h2 class="title has-text-centered">Sign In</h2>
-        <div class="box">
-            <form action="{{ url_for('login') }}" method="post">
-                <div class="field">
-                    <label class="label">Username</label>
-                    <div class="control">
-                        <input id="username" class="input" type="text" name="username" required>
-                    </div>
+        <form action="{{ url_for('login') }}" method="post" class="box">
+            <div class="field">
+                <label class="label">Username</label>
+                <div class="control">
+                    <input id="username" class="input" type="text" name="username" placeholder="e.g. alex@example.com" required>
                 </div>
+            </div>
 
-                <div class="field">
-                    <label class="label">Password</label>
-                    <div class="control">
-                        <input id="password" class="input" type="text" name="password" required>
-                    </div>
+            <div class="field">
+                <label class="label">Password</label>
+                <div class="control">
+                    <input id="password" class="input" type="text" name="password" placeholder="********" required>
                 </div>
+            </div>
 
-                <div class="field">
-                    <div class="control">
-                        <input type="submit" class="button is-dark is-fullwidth is-medium" value="Sign in">
-                    </div>
+            <div class="field">
+                <div class="control">
+                    <input type="submit" class="button is-dark is-fullwidth is-medium" value="Sign in">
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </section>
 {% endblock %}
