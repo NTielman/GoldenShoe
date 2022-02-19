@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %} 404 {% endblock %}
+
+{% block content %}
+
+<!----------------  flashed messages and notifications  ---------------->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+            <div class="notification is-danger">{{msg}}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<hr>
+
+<section class="section">
+  <div class="container">
+    <div class="block">
+      <h1 class="title">Uh oh!</h1>
+    </div>
+
+    <!-----------------  content and search field  ----------------->
+    <div class="block">
+      <p class="subtitle">Sorry, the page you were looking for was not found.</p>
+      <div class="field">
+        <div class="control has-icons-right">
+      
+        </div>
+      </div>
+    </div>
+
+    <!---------------------  link to homepage  --------------------->
+    <div class="block">
+      <h2 class="subtitle">
+        <a href="">Go back to Betsy.com</a>
+      </h2>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
