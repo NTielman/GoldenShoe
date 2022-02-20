@@ -2,18 +2,6 @@
 {% block title %} 404 {% endblock %}
 
 {% block content %}
-
-<!----------------  flashed messages and notifications  ---------------->
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for msg in messages %}
-            <div class="notification is-danger">{{msg}}</div>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
-
-<hr>
-
 <section class="section is-large">
   <div class="container">
     <div class="block">
@@ -26,7 +14,7 @@
 
     <div class="block">
       <p class="subtitle has-text-centered">
-        <a href="">Go back to Home</a>
+        <a>Go back to Home</a>
       </p>
     </div>
   </div>
