@@ -18,10 +18,10 @@ def verify_signup(user_name, full_name, address, avatar_url, password):
         if new_user:
             return True
         else:
-            flash("Something went wrong. Couldn't create your account", 'error')
+            flash("Something went wrong. Couldn't create your account", 'danger')
             return False
     else:
-        flash("Username already exists", 'error')
+        flash("Username already exists", 'danger')
         return False
 
 
@@ -32,13 +32,13 @@ def verify_signin(user_name, password):
     if user_password:  # user is existing user
         entered_password = hash_password(password)
         if entered_password == user_password:
-            flash("You are logged in", 'info')
+            flash("You are logged in", 'success')
             return True
         else:
-            flash("Incorrect password", 'error')
+            flash("Incorrect password", 'danger')
             return False
     else:
-        flash("Username not found", 'error')
+        flash("Username not found", 'danger')
         return False
 
 
@@ -51,10 +51,10 @@ def verify_admin_signup(user_name, full_name, password):
         if new_admin:
             return True
         else:
-            flash("Something went wrong. Couldn't create your account", 'error')
+            flash("Something went wrong. Couldn't create your account", 'danger')
             return False
     else:
-        flash("Username already exists", 'error')
+        flash("Username already exists", 'danger')
         return False
 
 
@@ -65,11 +65,11 @@ def verify_admin(user_name, password):
     if admin_password:  # admin exists
         entered_password = hash_password(password)
         if entered_password == admin_password:
-            flash("You are logged in", 'info')
+            flash("You are logged in", 'success')
             return True
         else:
-            flash("Incorrect password", 'error')
+            flash("Incorrect password", 'danger')
             return False
     else:
-        flash("Username not found", 'error')
+        flash("Username not found", 'danger')
         return False

@@ -39,7 +39,7 @@ def create_review(buyer_id, product_id, rating, description, image1, image2, ima
             buyer=User.get_by_id(buyer_id), product=Product.get_by_id(product_id), rating=rating, text_body=description, review_image1=image1, review_image2=image2, review_image3=image3
         )
     except peewee.PeeweeException:
-        flash("Could not add your review, please try again later", 'error')
+        flash("Could not add your review, please try again later", 'danger')
         return False
 
 
@@ -56,12 +56,12 @@ def remove_review(user_id, review_id):
         else:
             return False
     except peewee.IntegrityError:
-        flash("Could not remove your review.", 'error')
+        flash("Could not remove your review.", 'danger')
         return False
 
 
 def get_product_base(product_id):
-    '''finds and returns a product dictionary from database'''
+    '''finds and returns a base product dictionary from database'''
     try:
         product = Product.get_by_id(product_id)
         return model_to_dict(product, backrefs=True)
@@ -69,7 +69,7 @@ def get_product_base(product_id):
         return False
 
 def get_product_unit(product_id):
-    '''finds and returns a speecific product varriant from database'''
+    '''finds and returns a specific product variant from database'''
     try:
         product = ProductUnit.get_by_id(product_id)
         return model_to_dict(product, backrefs=True)
@@ -132,7 +132,7 @@ def checkout(buyer_id, cart):
                 product.qty -= quantity
                 product.save()
             else:
-                flash(f"Could not order '{product_title}'. Not enough in stock", 'error')
+                flash(f"Could not order '{product_title}'. Not enough in stock", 'danger')
         return True
     except peewee.PeeweeException:
         return False
