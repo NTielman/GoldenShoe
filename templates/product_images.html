@@ -1,0 +1,23 @@
+{% if images %}
+<!---------  Large image  ------------>
+<figure class="image is-1by1 is-hidden-mobile">
+    <img src="{{images[0]}}" alt="product thumbnail" id="featured-image">
+</figure>
+<br>
+<div class="columns">
+    <!---------  Small images  ------------>
+    {% for image in images %}
+    <div class="column">
+        <figure class="image is-square">
+            <img @click="setFeaturedImage" src="{{ image }}" class="product-image" alt="product thumbnail">
+        </figure>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<!---------  Placeholder image  ------------>
+<figure class="image is-1by1">
+    <img src="http://cdn.shopify.com/s/files/1/0169/2660/5412/collections/placeholder-images-collection-1_large_807560ab-9024-46ea-ab0a-bb49df2b3bb8_1200x1200.png?v=1551259616"
+        alt="product image placeholder">
+</figure>
+{% endif %}
