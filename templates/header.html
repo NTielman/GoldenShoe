@@ -1,0 +1,128 @@
+<header class="header">
+    <nav class="navbar is-spaced is-transparent is-fixed-top has-shadow" role="navigation" aria-label="main navigation">
+
+        <div class="navbar-brand">
+            <!---------------------  Company logo  --------------------->
+            <a class="navbar-item is-size-3">Golden
+                Shoe</a>
+
+            <!---------------------  Burger icon  --------------------->
+            <a role="button" id="burger-menu" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <!---------------------  Menu  --------------------->
+        <div class="navbar-menu p-5" id="main-navbar">
+            <div class="navbar-start">
+                <a class="navbar-item">
+                    Home
+                </a>
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link is-arrowless">
+                        Products
+                    </a>
+                    <div class="navbar-dropdown is-boxed">
+                        <a class="navbar-item">
+                            All
+                        </a>
+                        <a class="navbar-item">
+                            Women's Shoes
+                        </a>
+                        <a class="navbar-item">
+                            Men's Shoes
+                        </a>
+                    </div>
+                </div>
+
+                {% if "user" in session %}
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link is-arrowless">
+                        My account
+                    </a>
+                    <div class="navbar-dropdown is-boxed">
+                        <div class="navbar-item">
+                            <span class="icon-text">
+                                <span class="icon">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                                <span>{{ session['user']['full_name'] }}</span>
+                                <p>
+                                    <a class="has-text-dark">View your
+                                        profile</a>
+                                </p>
+                            </span>
+                        </div>
+                        <div class="navbar-item">
+                            <span class="icon-text">
+                                <span class="icon">
+                                    <i class="fas fa-clipboard"></i>
+                                </span>
+                                <span>
+                                    <a class="has-text-dark">Purchases and
+                                        reviews</a>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="navbar-item">
+                            <span class="icon-text">
+                                <span class="icon">
+                                    <i class="fas fa-cog"></i>
+                                </span>
+                                <span>
+                                    <a class="has-text-dark">Account settings</a>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="navbar-item">
+                            <span class="icon-text">
+                                <span class="icon">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </span>
+                                <span>
+                                    <a class="has-text-dark" href="{{ url_for('logout') }}">Sign out</a>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <a class="navbar-item">
+                    About
+                </a>
+
+                <a class="navbar-item">
+                    Contact
+                </a>
+            </div>
+
+            <!---------------------  Sign in/out   --------------------->
+            <div class="navbar-end">
+                {% if "user" in session %}
+                <a class="has-text-dark has-text-weight-semibold navbar-item" href="{{ url_for('logout') }}">
+                    <span>Sign out</span>
+                </a>
+                {% else %}
+                <a id="sign_in" class="has-text-dark has-text-weight-semibold navbar-item">
+                    <span>Sign in</span>
+                </a>
+                {% endif %}
+
+                <!---------------------  Cart   --------------------->
+                <a class="has-text-dark has-text-weight-semibold navbar-item" href="{{ url_for('view_cart') }}">
+                    <span class="is-hidden-desktop">View Cart</span>
+                    {% if 'cart' in session and session['cart']|length > 0 %}
+                    <i class="fas fa-cart-plus is-hidden-touch"></i>
+                    {% else %}
+                    <i class="fas fa-shopping-cart is-hidden-touch"></i>
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
