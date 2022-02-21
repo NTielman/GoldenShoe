@@ -1,0 +1,16 @@
+<div class="container mt-6">
+    <!---------  Title  ------------>
+    <h2 class="title has-text-weight-bold my-3 is-size-4">Product Reviews</h2>
+    {% if reviews %}
+        <!---------  User reviews  ------------>
+        {% for review in reviews %}
+            {% include 'review_card.html' %}
+        {% endfor %}
+    {% else %}
+        <!---------  Placeholder no reviews  ------------>
+        <p class="mb-3">No reviews yet. Be the first to leave a review!</p>
+    {% endif %}
+
+    <!---------  Review form  ------------>
+    {% include 'add_review_form.html' %}
+</div>

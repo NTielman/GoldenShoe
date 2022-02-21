@@ -25,3 +25,22 @@
 .menu-list a:hover {
   background-color: transparent;
 }
+
+.media-content {
+  overflow: visible;
+}
+
+/* higlight hovered star + all stars that follow it */
+.rating-field label:hover,
+.rating-field label:hover ~ label,
+.rating-field label input:checked ~ .icon .fa-star {
+  color: #f14668;
+  transition: color 200ms ease-out;
+}
+
+/* reverse star directions */
+.rating-field {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
