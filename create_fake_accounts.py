@@ -2,15 +2,6 @@ from models import create_tables
 from helpers import verify_signup
 from admin_queries import add_product_to_catalog, add_images_to_product, add_variant_to_catalog
 
-##################################### admins ##############################################
-# possible to use these admin details to log in, or create your own account
-admin = {
-    "full_name": 'Ad Min Addams',
-    "username": 'TheAdminFamily',
-    "password": 'w3dnesd@y',
-}
-
-
 ##################################### users ##############################################
 # possible to use any of these user details to log in, or create your own account
 
@@ -40,7 +31,7 @@ alaska = {
 
 
 ##################################### product images ##############################################
-# 
+
 
 white_sneakers = [
                 '../static/images/sneakers/sam-sneak1.webp',
@@ -84,7 +75,7 @@ oxford_brown = [
 
 
 ##################################### products ##############################################
-# possible to edit, modify and update any of these products, or create your own
+
 
 helen_heels = {
     'title': 'Helen Heels',

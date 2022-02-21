@@ -1,7 +1,4 @@
-from email.mime import image
-from email.policy import default
 import os
-from random import choices
 from peewee import *
 from datetime import date
 
@@ -33,12 +30,6 @@ class User(BaseModel):
     full_name = CharField()
     address = CharField()
     avatar_url = CharField(null=True)
-
-class Admin(BaseModel):
-    admin_id = AutoField()
-    username = CharField(unique=True, max_length=100)
-    password = CharField()
-    full_name = CharField()
 
 
 class Product(BaseModel):
@@ -88,7 +79,7 @@ class Review(BaseModel):
     review_id = AutoField()
     buyer = ForeignKeyField(User, backref='reviews',
                             on_delete='SET NULL', null=True)
-    # if product or user is deleted from db we should still
+    # if user is deleted from db we should still
     # be able to view product_review
     product = ForeignKeyField(
         Product, backref='reviews', on_delete='CASCADE', null=False)
@@ -112,4 +103,4 @@ ProductImage = Image.product.get_through_model()
 
 def create_tables():
     with db:
-        db.create_tables([User, Admin, Product, Size, Colour, ProductUnit, Transaction, Review, Image, ProductImage])
+        db.create_tables([User, Product, Size, Colour, ProductUnit, Transaction, Review, Image, ProductImage])

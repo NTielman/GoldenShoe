@@ -1,24 +1,5 @@
 import peewee
-from models import Admin, Product, ProductUnit, Image, Size, Colour
-
-
-def create_admin(user_name, admin_full_name, admin_password):
-    '''adds an admin to database'''
-    try:
-        return Admin.create(
-            username=user_name, full_name=admin_full_name, password=admin_password
-        )
-    except peewee.PeeweeException:
-        return False
-
-
-def get_admin_password(user_name):
-    '''returns an admin password from database'''
-    try:
-        admin = Admin.get(Admin.username == user_name)
-        return admin.password
-    except peewee.DoesNotExist:
-        return False
+from models import Product, ProductUnit, Image, Size, Colour
 
 
 def add_product_to_catalog(product_info):
