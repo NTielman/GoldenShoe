@@ -2,206 +2,122 @@
 {% block title %} {{ product.title }} {% endblock %}
 
 {% block content %}
-
-<!----------------  flashed messages and notifications  ---------------->
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for msg in messages %}
-            <div class="notification is-success is-toast">{{msg}}</div>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
-
-<hr>
-
-<section class="section">
-    <div class="container">
+<section class="section is-medium">
+    <div class="container is-max-desktop">
         <div class="columns">
             <!---------------------  Product images  -------------------->
-            <div class="column is-two-thirds">
-                {% if product_images %}
-                    <figure class="image is-1by1">
-                        <img src="{{ product_images[0] }}" alt="product thumbnail">
-                    </figure>
-                    <br>
-                    <div class="columns">
-                        {% for image_url in product_images %}
-                            <div class="column">
-                                <figure class="image is-128x128">
-                                    <img src="{{ image_url }}" alt="product thumbnail">
-                                </figure>
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    <figure class="image is-1by1">
-                        <img src="http://cdn.shopify.com/s/files/1/0169/2660/5412/collections/placeholder-images-collection-1_large_807560ab-9024-46ea-ab0a-bb49df2b3bb8_1200x1200.png?v=1551259616"
-                            alt="product image placeholder">
-                    </figure>
-                {% endif %}
+            <div class="column" id="product-images">
+                {% include 'product_images.html' %}
             </div>
-
             <!---------------------  product info   --------------------->
-            <div class="column ml-6">
+            <div class="column px-6">
                 <div class="block">
-                    <a class="subtitle has-text-weight-light has-text-dark"
-                    href="{{ url_for('user_page', username=product.vendor.username) }}">{{ product.vendor.username }}</a>
-
-                    <br>
-
-                    <span class="icon-text">
-                        <span class="icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </span>
-                        <span>Local seller</span>
-                    </span>
                     <h1 class="title has-text-weight-light my-3">{{ product.title }}</h1>
-                    <p class="tag is-warning is-rounded">Betsy's Pick</p>
-                    <h2 class="title has-text-weight-bold my-3">${{ product.price_in_cents/100 }}</h2>
+                    <h2 class="title has-text-weight-bold my-3 is-size-4">{{
+                        "$%.2f"|format(default_product.price_in_cents/100) }}
+                    </h2>
 
                     <!------------------  add to cart button   ------------------>
                     <form method="post" action="{{ url_for('product_page', product_id=product.prod_id) }}">
-                        <div class="field">
+
+                        {% if colours %}
+                        <div class="block">
+                            <p class="has-text-weight-semibold mb-1">
+                                Colour: {{ default_product.colour.colour_value }}
+                            </p>
                             <div class="field">
                                 <div class="control">
-                                    <input type="number" name="quantity" value="1"
-                                        class="input is-rounded has-text-centered" min="1" max="{{ product.qty }}">
+                                    {% for colour in colours %}
+                                    <label class="radio">
+                                        <input class="is-hidden colour-radio" type="radio" name="colour"
+                                            value="{{ colour }}">
+                                        <span class="icon is-medium">
+                                            <i class="fas fa-solid fa-square fa-border"
+                                                style="color: {{ colour }};"></i>
+                                        </span>
+                                    </label>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
 
-                        <div class="field">
+                        {% if sizes %}
+                        <div class="block">
+                            <p class="has-text-weight-semibold mb-1">
+                                Size: {{ default_product.size.size_value }}
+                            </p>
+                            <div class="field">
+                                <div class="control">
+                                    {% for size in sizes %}
+                                    <label class="radio">
+                                        <input class="is-hidden size-radio" type="radio" name="size" value="{{ size }}">
+                                        <span class="tag">
+                                            {{ size }}
+                                        </span>
+                                    </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <button class="button is-white p-0" id="size-guide-btn">Size Guide</button>
+                        </div>
+                        {% include 'size_modal.html' %}
+                        {% endif %}
+
+                        <div class="field is-grouped">
                             <div class="control">
-                                <input type="submit" class="button is-rounded is-dark is-fullwidth is-medium"
-                                    value="Add to cart">
+                                <input type="number" name="quantity" value="1" class="input has-text-centered" min="1"
+                                    max="{{ default_product.qty }}">
+                            </div>
+                            <div class="control">
+                                <input type="submit" class="button is-danger" value="Add to cart">
                             </div>
                         </div>
                     </form>
-
-                    <br>
-
-                    <!------------------  sale motivators   ------------------>
-                    <span class="icon-text">
-                        <span class="icon">
-                            <i class="fas fa-shopping-cart"></i>
-                        </span>
-                        <span><strong>Other people want this.</strong> Over 20 people have this in their carts right
-                            now.</span>
-                    </span>
-
-                    <br>
-
-                    <br>
-
-                    <span class="icon-text">
-                        <span class="icon">
-                            <i class="fas fa-gifts"></i>
-                        </span>
-                        <span><strong>Gift wrapping available</strong></span>
-                    </span>
                 </div>
-
-                <br>
 
                 <br>
 
                 <!------------------  extra prod info   ------------------>
                 <div class="block">
-                    <h2 class="has-text-weight-semibold">Highlights</h2>
-
-                    <br>
-
-                    <span class="icon-text">
-                        <span class="icon">
-                            <i class="fas fa-hand-paper"></i>
-                        </span>
-                        <span>Handmade</span>
-                    </span>
-
-                    <br>
-
-                    <br>
-
-                    <span class="icon-text">
-                        <span class="icon">
-                            <i class="fas fa-seedling"></i>
-                        </span>
-                        <span>Materials: natural</span>
-                    </span>
-
-                    <br>
-
-                    <br>
-
-                    <!------------------  product description   ------------------>
-                    <h2 class="has-text-weight-semibold">Description</h2>
-
-                    <br>
-
+                    <h2 class="has-text-weight-semibold mb-3">Description</h2>
                     <p>{{ product.description }}</p>
                 </div>
 
-                <br>
-
-                <br>
-
-                <!------------------  seller info  ------------------>
                 <div class="block">
-                    <h2 class="has-text-weight-semibold">Meet your seller</h2>
-
-                    <br>
-
-                    <div class="media">
-                        <figure class="image is-96x96 media-left">
-                            <img width="128" height="128" class="is-rounded" src="{{ product.vendor.avatar_url }}"
-                                alt="user avatar">
-                        </figure>
-                        <div class="media-content">
-                            <div class="content">
-                                <h1 class="has-text-weight-light is-size-3" style="font-family: Georgia;">{{
-                                    product.vendor.username }}</h1>
-                                <a class="has-text-dark" href="{{ url_for('user_page', username=product.vendor.username) }}">Owner of {{
-                                    product.vendor.username }}</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <br>
-
-                    <a class="button has-text-weight-bold is-fullwidth is-outlined is-rounded">Message {{
-                        product.vendor.username }}</a>
+                    <h2 class="has-text-weight-semibold mb-3">Shipping</h2>
+                    <p>Please allow 2 - 4 weeks for delivery due to possible delays related to your country's covid
+                        regulations</p>
                 </div>
             </div>
         </div>
 
         <hr>
-
-        <!------------------  related tags section  ------------------>
-        <div class="block">
-            <h2 class="subtitle has-text-weight-light is-size-3" style="font-family: Georgia;">Explore related tags</h2>
-            {% if product_tags %}
-                {% for tag in product_tags %}
-                    <a href="{{ url_for('search_products_by_tag', tag=tag) }}" class="button is-dark is-rounded">{{ tag }}</a>
-                {% endfor %}
-            {% else %}
-                <p>no tags associated with {{ product.title }}</p>
-            {% endif %}
-        </div>
-
-        <br>
-
-        <!------------------  Betsy footer info  ------------------>
-        <div class="level">
-            <div class="level-left">
-                <div class="level-item">
-                    <p class="is-size-7">Listed on {{ product.date_added }}</p>
-                </div>
-            </div>
-
-            <div class="level-right">
-                <p class="level-item is-size-7">Report this item to Betsy</p>
-            </div>
-        </div>
+        {% include 'reviews.html' %}
     </div>
 </section>
+{% endblock %}
+
+{% block script %}
+<script>
+    Vue.createApp({
+        delimeters: ['[[', ']]'],
+        data() {
+            return {
+
+            }
+        },
+        mounted() {
+        },
+        methods: {
+            setFeaturedImage(e) {
+                const featuredImage = document.querySelector('#featured-image');
+                if (featuredImage.src != e.target.src) {
+                    featuredImage.src = e.target.src;
+                }
+            }
+        }
+    }).mount('#product-images')
+</script>
+<script src="{{ url_for('static', filename='js/sizeModal.js') }}"></script>
 {% endblock %}

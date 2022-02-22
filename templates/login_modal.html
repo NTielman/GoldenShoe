@@ -1,0 +1,39 @@
+<div class="modal login">
+    <div class="modal-background login"></div>
+    <div class="modal-content has-background-white py-5 px-5">
+        <h2 class="subtitle has-text-weight-semibold">Sign in</h2>
+
+        <form method="post" action="{{ url_for('login') }}">
+            <!---------------------  Username   --------------------->
+            <div class="field">
+                <label class="label">Username</label>
+                <div class="control">
+                    <input class="input" type="text" name="username" placeholder="e.g. alex@example.com" required>
+                </div>
+            </div>
+
+            <!---------------------  Password   --------------------->
+            <div class="field">
+                <label class="label">Password</label>
+                <div class="control">
+                    <input class="input" type="text" name="password" placeholder="********" required>
+                </div>
+            </div>
+
+            <!---------------------  Sign in button   --------------------->
+            <div class="field">
+                <div class="control">
+                    <input type="submit" class="button is-medium is-fullwidth is-dark" value="Sign in">
+                </div>
+            </div>
+        </form>
+
+        <hr>
+
+        <p>
+            <a>Don't have an account yet?</a>
+        </p>
+    </div>
+    <!---------------------  Close button   --------------------->
+    <button class="login modal-close is-large" aria-label="close"></button>
+</div>

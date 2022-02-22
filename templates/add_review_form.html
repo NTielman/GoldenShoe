@@ -1,0 +1,41 @@
+<form action="{{ url_for('review_product', product_id=product.prod_id) }}" id="review-form" method="post"
+    class="section is-medium">
+    <div class="field">
+        <div class="control rating-field">
+            <!---------  Star rating input  ------------>
+            {% for n in range(5) %}
+            <label class="radio mx-0">
+                <input class="is-hidden" type="radio" name="rating" value="{{ 5 - n }}">
+                <span class="icon">
+                    <i class="fas fa-solid fa-star"></i>
+                </span>
+            </label>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!---------  Review body  ------------>
+    <div class="field">
+        <label class="label">Text Body</label>
+        <div class="control">
+            <textarea class="textarea" name="description" placeholder="Let others know what you think"></textarea>
+        </div>
+    </div>
+
+    <!---------  Upload images  ------------>
+    <label class="label">Add some images</label>
+    <div class="field is-horizontal">
+        {% for n in range(3) %}
+        <div class="control">
+            <input name="img{{n + 1}}" class="input" type="text" placeholder="Image url">
+        </div>
+        {% endfor %}
+    </div>
+
+    <!---------  Add review button  ------------>
+    <div class="field">
+        <div class="control">
+            <input type="submit" class="button is-dark" value="Add Review">
+        </div>
+    </div>
+</form>

@@ -1,0 +1,65 @@
+<div class="box">
+    <article class="media">
+        <!---------  User avatar  ------------>
+        <figure class="media-left">
+            <p class="image is-64x64">
+                <img src="{{ review.buyer.avatar_url }}">
+            </p>
+        </figure>
+
+        <div class="media-content">
+            <div class="content">
+                <div>
+                    <!---------  User name  ------------>
+                    <strong class="mr-1">{{ review.buyer.full_name }}</strong>
+                    <br>
+                    <!---------  Star Rating  ------------>
+                    <small>
+                        {% for n in range(review.rating) %}
+                        <i class="fas fa-solid fa-star"></i>
+                        {% endfor %}
+                    </small>
+                    <!---------  Post date  ------------>
+                    <small class="ml-1">{{ review.date }}</small>
+                </div>
+
+                <!---------  Review text body  ------------>
+                <div>
+                    {{ review.text_body }}
+                </div>
+
+                <!---------  Review images  ------------>
+                <div class="columns mt-0 is-mobile">
+                    {% if review.review_image1 %}
+                    <div class="column  is-one-fifth">
+                        <p class="image is-square">
+                            <img src="{{ review.review_image1  }}" alt="product thumbnail">
+                        </p>
+                    </div>
+                    {% endif %}
+                    {% if review.review_image2 %}
+                    <div class="column  is-one-fifth">
+                        <p class="image is-square">
+                            <img src="{{ review.review_image2 }}" alt="product thumbnail">
+                        </p>
+                    </div>
+                    {% endif %}
+                    {% if review.review_image3 %}
+                    <div class="column  is-one-fifth">
+                        <p class="image is-square">
+                            <img src="{{ review.review_image3  }}" alt="product thumbnail">
+                        </p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!---------  Delete review button  ------------>
+        {% if "user" in session and session['user'] == review.buyer %}
+        <div class="media-right">
+            <button class="delete"></button>
+        </div>
+        {% endif %}
+    </article>
+</div>
