@@ -7,7 +7,7 @@
         <div class="columns">
             <!---------------------  Product images  -------------------->
             <div class="column" id="product-images">
-                {% include 'product_images.html' %} 
+                {% include 'product_images.html' %}
             </div>
             <!---------------------  product info   --------------------->
             <div class="column px-6">
@@ -59,8 +59,9 @@
                                     {% endfor %}
                                 </div>
                             </div>
-                            <button class="button is-white p-0">Size Guide</button>
+                            <button class="button is-white p-0" id="size-guide-btn">Size Guide</button>
                         </div>
+                        {% include 'size_modal.html' %}
                         {% endif %}
 
                         <div class="field is-grouped">
@@ -118,4 +119,5 @@
         }
     }).mount('#product-images')
 </script>
+<script src="{{ url_for('static', filename='js/sizeModal.js') }}"></script>
 {% endblock %}
